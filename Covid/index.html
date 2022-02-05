@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid Count API</title>
+    <link rel="stylesheet" href = "style.css">
+ 
+
+</head>
+
+    <div class="container">
+        
+        <h1>COVID LIVE DATA</h1>
+        <table class="tablecase">
+            <thead>
+                <tr>
+                    <th>Total cases</th>
+                    <th>Total Deaths</th>
+                    <th>New Confirmed</th>
+                    <th>New Deaths</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id = "data">
+                    
+                </tr>
+            </tbody>
+        </table>
+      
+        <div class="con">
+        <button onclick="refereshData()" class="referesh"> Referesh Data
+            <img src="./refresh.png" id="icon" height="1rem">
+        </button>
+        </div>
+        <div>
+    </div>
+    
+</body>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+       
+            init()
+
+            function init(){
+                var url="https://api.covid19api.com/summary"
+
+                var data=' '
+
+                $.get(url,function(data){
+                    console.log(data.Global)
+                    data = `
+
+                    <td>${data.Global.TotalConfirmed}</td>
+                    <td>${data.Global.TotalDeaths}</td>
+                    <td>${data.Global.NewConfirmed}</td>
+                    <td>${data.Global.NewDeaths}</td>
+
+
+                    `
+
+                    $("#data").html(data)
+                })
+            }
+
+            
+                
+            
+        
+        function refereshData(){
+                clearData()
+                init()
+            }
+            function clearData(){
+                $("#data").empty()
+            }
+    </script>
+  
+</html>
